@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Validador de Billetes - Serie B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador Serie B</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -11,35 +11,30 @@
     <div class="banner-bolivia"></div>
 
     <header class="navbar">
-    <div class="logo-container">
-        <img src="img/logo_ingenieros.png" class="logo-animado" alt="Logo Ingenieros">
-    </div>
-    <div class="titulo-central">
-        <h1>Validador de Billetes</h1>
-        <h2>Serie B - Bolivia</h2>
-    </div>
-    <div class="logo-container">
-        <img src="img/logo.png" class="logo-animado" alt="Logo Farid">
-    </div>
-</header>
+        <img src="img/logo_ingenieros.png" class="logo-animado" alt="Logo">
+        <div class="titulo-central">
+            <h1>CONTROL DE SERIE</h1>
+            <h2>Billetes Serie B</h2>
+        </div>
+        <img src="img/logo.png" class="logo-animado" alt="Logo Empresa">
+    </header>
 
     <main class="content">
-    <div class="glass-card">
-        <button id="btnVolver" class="btn-back hidden" onclick="volverAtras()">← Volver</button>
+        <div class="glass-card">
+            <button id="btnVolver" class="btn-back hidden" onclick="volverAtras()">← Volver</button>
 
-        <h3>Control de Billetes Inhabilitados</h3>
-        
-        <div id="step1">
-            <button class="btn-blue" onclick="mostrarPaso2()">Digitar Número de Serie</button>
-            <button class="btn-gray" onclick="activarEscaner()">Escanear Billete</button>
-        </div>
+            <div id="step1">
+                <button class="btn-blue" onclick="activarEscaner()">📷 ESCANEAR SERIE</button>
+                <button class="btn-gray" onclick="mostrarPaso2()">⌨️ DIGITAR SERIE</button>
+            </div>
 
-        <div id="step2" class="hidden">
-            <p class="label-paso">1. Selecciona el corte:</p>
-            <div class="cortes-grid">
-                <img src="img/billete-10.jpg" onclick="seleccionarCorte(10)">
-                <img src="img/billete-20.jpg" onclick="seleccionarCorte(20)">
-                <img src="img/billete-50.jpg" onclick="seleccionarCorte(50)">
+            <div id="step2" class="hidden">
+                <h3>Selecciona el Billete</h3>
+                <div class="cortes-grid">
+                    <img src="img/billete-10.jpg" onclick="seleccionarCorte(10)" alt="10">
+                    <img src="img/billete-20.jpg" onclick="seleccionarCorte(20)" alt="20">
+                    <img src="img/billete-50.jpg" onclick="seleccionarCorte(50)" alt="50">
+                </div>
             </div>
 
             <div id="visualizer" class="hidden">
@@ -47,30 +42,31 @@
             </div>
 
             <div id="inputArea" class="hidden">
-                <p class="label-paso">2. Ingrese Número de Serie:</p>
-                <input type="tel" id="serieInput" placeholder="000000000" maxlength="9">
-                <button class="btn-green" onclick="verificar()">Verificar Billete</button>
+                <input type="number" id="serieInput" placeholder="Número de serie">
+                <button class="btn-green" onclick="verificar()">VERIFICAR</button>
             </div>
-        </div>
 
-        <div id="resultContainer" class="result-box hidden"></div>
-        <button id="btnReset" class="btn-blue hidden" style="margin-top: 15px;" onclick="reiniciarProceso()">Verificar otro billete</button>
-    </div>
-</main>
+            <div id="resultContainer" class="result-box hidden"></div>
+            <button id="btnReset" class="btn-gray hidden" style="margin-top:10px" onclick="reiniciarProceso()">Verificar Otro</button>
+        </div>
+    </main>
 
     <div id="scanner-modal" class="modal-scanner" style="display: none;">
         <div class="modal-box">
             <span class="btn-cerrar" onclick="cerrarEscaner()">&times;</span>
+            <h3 style="margin-bottom: 15px;">Encuadra la Serie</h3>
             <div id="reader"></div>
+            <p style="font-size: 0.9rem; color: #555; margin-top: 10px;">
+                Aleja el billete unos 15cm para enfocar.
+            </p>
         </div>
     </div>
 
     <footer class="footer-simple">
-        <p>Copyright (c) 2026 Richard y Farid Ortiz Ingenieros</p>
+        &copy; 2026 Richard - Sistemas e Ingeniería
     </footer>
 
-    <audio id="audioBeep" src="img/beep.mp3" preload="auto"></audio>
-
+    <audio id="audioBeep" src="img/beep.mp3"></audio>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="data.js"></script>
     <script src="app.js"></script>
