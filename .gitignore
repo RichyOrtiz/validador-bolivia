@@ -1,0 +1,14 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Carpetas de editores
+.vscode/
+.idea/
+
+# Temporales o logs
+*.log
+npm-debug.log*
+
+# Si llegaras a usar carpetas de dependencias en el futuro
+node_modules/

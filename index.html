@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Validador de Billetes - Serie B</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="banner-bolivia"></div>
+
+    <header class="navbar">
+    <div class="logo-container">
+        <img src="img/logo_ingenieros.png" class="logo-animado" alt="Logo Ingenieros">
+    </div>
+    <div class="titulo-central">
+        <h1>Validador de Billetes</h1>
+        <h2>Serie B - Bolivia</h2>
+    </div>
+    <div class="logo-container">
+        <img src="img/logo.png" class="logo-animado" alt="Logo Farid">
+    </div>
+</header>
+
+    <main class="content">
+    <div class="glass-card">
+        <button id="btnVolver" class="btn-back hidden" onclick="volverAtras()">← Volver</button>
+
+        <h3>Control de Billetes Inhabilitados</h3>
+        
+        <div id="step1">
+            <button class="btn-blue" onclick="mostrarPaso2()">Digitar Número de Serie</button>
+            <button class="btn-gray" onclick="activarEscaner()">Escanear Billete</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <p class="label-paso">1. Selecciona el corte:</p>
+            <div class="cortes-grid">
+                <img src="img/billete-10.jpg" onclick="seleccionarCorte(10)">
+                <img src="img/billete-20.jpg" onclick="seleccionarCorte(20)">
+                <img src="img/billete-50.jpg" onclick="seleccionarCorte(50)">
+            </div>
+
+            <div id="visualizer" class="hidden">
+                <img id="billeteGrande" src="" class="img-preview">
+            </div>
+
+            <div id="inputArea" class="hidden">
+                <p class="label-paso">2. Ingrese Número de Serie:</p>
+                <input type="tel" id="serieInput" placeholder="000000000" maxlength="9">
+                <button class="btn-green" onclick="verificar()">Verificar Billete</button>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="result-box hidden"></div>
+        <button id="btnReset" class="btn-blue hidden" style="margin-top: 15px;" onclick="reiniciarProceso()">Verificar otro billete</button>
+    </div>
+</main>
+
+    <div id="scanner-modal" class="modal-scanner" style="display: none;">
+        <div class="modal-box">
+            <span class="btn-cerrar" onclick="cerrarEscaner()">&times;</span>
+            <div id="reader"></div>
+        </div>
+    </div>
+
+    <footer class="footer-simple">
+        <p>Copyright (c) 2026 Richard y Farid Ortiz Ingenieros</p>
+    </footer>
+
+    <audio id="audioBeep" src="img/beep.mp3" preload="auto"></audio>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
