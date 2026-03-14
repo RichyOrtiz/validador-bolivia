@@ -9,13 +9,13 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "img/logo_izq.png",
+      "src": "img/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "img/logo_der.png",
+      "src": "img/logo_ingenieros.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
