@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validador Serie B</title>
+    <title>Validador Serie B - Bolivia</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -11,10 +11,10 @@
     <div class="banner-bolivia"></div>
 
     <header class="navbar">
-        <img src="img/logo_ingenieros.png" class="logo-animado" alt="Logo">
+        <img src="img/logo_ingenieros.png" class="logo-animado" alt="Logo Ingenieros">
         <div class="titulo-central">
-            <h1>CONTROL DE SERIE</h1>
-            <h2>Billetes Serie B</h2>
+            <h1>CONTROL DE SERIES</h1>
+            <h2 class="subtitulo-alerta">BILLETES INHABILITADOS SERIE B</h2>
         </div>
         <img src="img/logo.png" class="logo-animado" alt="Logo Empresa">
     </header>
@@ -26,10 +26,11 @@
             <div id="step1">
                 <button class="btn-blue" onclick="activarEscaner()">📷 ESCANEAR SERIE</button>
                 <button class="btn-gray" onclick="mostrarPaso2()">⌨️ DIGITAR SERIE</button>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Versión 1.0 - Sistemas</p>
             </div>
 
             <div id="step2" class="hidden">
-                <h3>Selecciona el Billete</h3>
+                <h3 style="color:#0056b3">Seleccione el Corte</h3>
                 <div class="cortes-grid">
                     <img src="img/billete-10.jpg" onclick="seleccionarCorte(10)" alt="10">
                     <img src="img/billete-20.jpg" onclick="seleccionarCorte(20)" alt="20">
@@ -43,27 +44,27 @@
 
             <div id="inputArea" class="hidden">
                 <input type="number" id="serieInput" placeholder="Número de serie">
-                <button class="btn-green" onclick="verificar()">VERIFICAR</button>
+                <button class="btn-green" onclick="verificar()">VERIFICAR AHORA</button>
             </div>
 
             <div id="resultContainer" class="result-box hidden"></div>
-            <button id="btnReset" class="btn-gray hidden" style="margin-top:10px" onclick="reiniciarProceso()">Verificar Otro</button>
+            <button id="btnReset" class="btn-gray hidden" style="margin-top:15px" onclick="reiniciarProceso()">Verificar Otro Número</button>
         </div>
     </main>
 
     <div id="scanner-modal" class="modal-scanner" style="display: none;">
         <div class="modal-box">
             <span class="btn-cerrar" onclick="cerrarEscaner()">&times;</span>
-            <h3 style="margin-bottom: 15px;">Encuadra la Serie</h3>
+            <h3 style="margin-bottom: 10px; color: #333;">Lector de Series</h3>
             <div id="reader"></div>
-            <p style="font-size: 0.9rem; color: #555; margin-top: 10px;">
-                Aleja el billete unos 15cm para enfocar.
+            <p style="font-size: 0.85rem; color: #d9534f; margin-top: 10px; font-weight: bold;">
+                Encuadre la serie horizontalmente
             </p>
         </div>
     </div>
 
     <footer class="footer-simple">
-        &copy; 2026 Richard - Sistemas e Ingeniería
+        &copy; 2026 Ing. Richard - Control de Seguridad Bancaria
     </footer>
 
     <audio id="audioBeep" src="img/beep.mp3"></audio>

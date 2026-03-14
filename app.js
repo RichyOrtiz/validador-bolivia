@@ -3,12 +3,16 @@ let html5QrCode = null;
 const beep = document.getElementById('audioBeep');
 const audioAlerta = new Audio('img/alerta.mp3');
 
+/**
+ * Sonido y Vibración
+ */
 function feedback(tipo) {
     if (tipo === 'error') {
+        audioAlerta.currentTime = 0;
         audioAlerta.play().catch(() => {});
-        if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
+        if (navigator.vibrate) navigator.vibrate([400, 100, 400]);
     } else {
-        beep.play().catch(() => {});
+        if (beep) { beep.currentTime = 0; beep.play().catch(() => {}); }
         if (navigator.vibrate) navigator.vibrate(100);
     }
 }
@@ -26,30 +30,35 @@ function seleccionarCorte(valor) {
     document.getElementById('billeteGrande').src = `img/billete-${valor}.jpg`;
     document.getElementById('visualizer').classList.remove('hidden');
     document.getElementById('inputArea').classList.remove('hidden');
+    document.getElementById('serieInput').value = "";
     document.getElementById('serieInput').focus();
 }
 
 function verificar() {
-    const rawValue = document.getElementById('serieInput').value.trim();
+    const input = document.getElementById('serieInput');
+    const rawValue = input.value.trim();
     if (!rawValue) return;
-    
+
     const numero = parseInt(rawValue);
     const res = document.getElementById('resultContainer');
     const serieFormateada = rawValue.padStart(9, '0');
     
     res.classList.remove('hidden');
+    // Buscamos en data.js
     const hallado = RANGOS_BCB.find(r => numero >= r.inicio && numero <= r.fin && r.corte === corteActual);
 
     if (hallado) {
         feedback('error');
-        res.innerHTML = `⚠️ INHABILITADO<br>Serie: ${serieFormateada}`;
+        res.innerHTML = `⚠️ BILLETE INHABILITADO<br>Serie: ${serieFormateada}<br>¡NO RECIBIR!`;
         res.className = "result-box error alerta-inhabilitado";
     } else {
         feedback('success');
-        res.innerHTML = `✅ VÁLIDO<br>Serie: ${serieFormateada}`;
+        res.innerHTML = `✅ BILLETE VÁLIDO<br>Serie: ${serieFormateada}<br>Corte: Bs${corteActual}`;
         res.className = "result-box success";
+        res.classList.remove('alerta-inhabilitado');
     }
     document.getElementById('btnReset').classList.remove('hidden');
+    res.scrollIntoView({ behavior: 'smooth' });
 }
 
 async function activarEscaner() {
@@ -59,11 +68,13 @@ async function activarEscaner() {
 
     const config = { 
         fps: 20, 
-        qrbox: { width: 280, height: 90 } // Rectángulo para la serie
+        qrbox: { width: 280, height: 90 } // Rectángulo optimizado para la serie
     };
 
     html5QrCode.start({ facingMode: "environment" }, config, (text) => {
-        document.getElementById('serieInput').value = text;
+        // Limpiamos el texto por si vienen espacios
+        const cleanText = text.replace(/\D/g, ""); // Solo números
+        document.getElementById('serieInput').value = cleanText;
         cerrarEscaner();
         if(corteActual === 0) mostrarPaso2(); else verificar();
     }).catch(() => cerrarEscaner());
@@ -80,11 +91,13 @@ function cerrarEscaner() {
 }
 
 function volverAtras() {
-    location.reload(); // Forma más rápida de resetear todo
+    location.reload(); 
 }
 
 function reiniciarProceso() {
+    feedback('click');
     document.getElementById('resultContainer').classList.add('hidden');
     document.getElementById('btnReset').classList.add('hidden');
     document.getElementById('serieInput').value = "";
+    document.getElementById('serieInput').focus();
 }
